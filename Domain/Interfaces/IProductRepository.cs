@@ -12,8 +12,8 @@ namespace Domain.Interfaces
         Task<IEnumerable<Product>> GetProducts();
         Task<Product> GetProductById(int id);
         Task<Product> GetProductByName(string name);
-        Task<Product> CreateProduct(Product product);
-        Task<Product> UpdateProduct(int id, Product product);
+        Task CreateProduct(Product product);
+        Task UpdateProduct(Product product);
         Task DeleteProduct(int id);
     }
 }

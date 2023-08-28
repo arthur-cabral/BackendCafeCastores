@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Products;
+using Application.DTOs.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<CreateProductDTO>> GetProducts();
-        Task<CreateProductDTO> GetProductById(int id);
-        Task<CreateProductDTO> GetProductByName(string name);
-        Task CreateProduct(CreateProductDTO productDTO);
-        Task UpdateProduct(CreateProductDTO productDTO);
-        Task DeleteProduct(int id);
+        Task<IEnumerable<GetProductDTO>> GetProducts();
+        Task<GetProductDTO> GetProductById(int id);
+        Task<GetProductDTO> GetProductByName(string name);
+        Task<MessageResponseDTO> CreateProduct(CreateProductDTO productDTO);
+        Task<MessageResponseDTO> UpdateProduct(CreateProductDTO productDTO);
+        Task<MessageResponseDTO> DeleteProduct(int id);
 
     }
 }

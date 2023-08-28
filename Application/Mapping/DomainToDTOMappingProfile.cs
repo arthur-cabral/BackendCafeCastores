@@ -16,6 +16,7 @@ namespace Application.Mapping
         public DomainToDTOMappingProfile()
         {
             CreateMap<Product, CreateProductDTO>().ReverseMap();
+            CreateMap<Product, GetProductDTO>().ReverseMap();
             CreateMap<User, CreateUserDTO>().ReverseMap();
             CreateMap<Sale, SaleDTO>().ReverseMap();
         }

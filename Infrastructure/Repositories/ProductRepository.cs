@@ -16,32 +16,33 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public Task<Product> CreateProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteProduct(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Product> GetProductById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Product> GetProductByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Product>> GetProducts()
         {
             return await Get().ToListAsync();
         }
 
-        public Task<Product> UpdateProduct(int id, Product product)
+        public async Task<Product> GetProductById(int id)
+        {
+            return await GetByProperty((x) => x.Id == id);
+        }
+
+        public async Task<Product> GetProductByName(string name)
+        {
+            return await GetByProperty((x) => x.Name == name);
+        }
+
+        public async Task CreateProduct(Product product)
+        {
+            Add(product);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task UpdateProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteProduct(int id)
         {
             throw new NotImplementedException();
         }

@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories
             return _context.Set<T>().AsNoTracking();
         }
 
-        public async Task<T> GetById(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetByProperty(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(predicate);
         }

@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Products;
+using Application.DTOs.Response;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
@@ -13,43 +14,47 @@ namespace Application.Services
 {
     public class ProductService : IProductService
     {
-        private IProductRepository _repository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
-        public ProductService(IMapper mapper, IProductRepository repository)
+        public ProductService(IMapper mapper, IProductRepository productRepository)
         {
-            this._repository = repository ?? 
-                throw new ArgumentNullException(nameof(repository));
+            _productRepository = productRepository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CreateProductDTO>> GetProducts()
+        public async Task<IEnumerable<GetProductDTO>> GetProducts()
         {
-            var product = await _repository.GetProducts();
-            return _mapper.Map<IEnumerable<CreateProductDTO>>(product);
+            var productEntity = await _productRepository.GetProducts();
+            return _mapper.Map<IEnumerable<GetProductDTO>>(productEntity);
         }
 
-        public async Task<CreateProductDTO> GetProductById(int id)
+        public async Task<GetProductDTO> GetProductById(int id)
         {
-            throw new NotImplementedException();
+            var productEntity = await _productRepository.GetProductById(id);
+            return _mapper.Map<GetProductDTO>(productEntity);
         }
 
-        public async Task<CreateProductDTO> GetProductByName(string name)
+        public async Task<GetProductDTO> GetProductByName(string name)
         {
-            throw new NotImplementedException();
+            var productEntity = await _productRepository.GetProductByName(name);
+            return _mapper.Map<GetProductDTO>(productEntity);
         }
 
-        public async Task CreateProduct(CreateProductDTO productDTO)
+        public async Task<MessageResponseDTO> CreateProduct(CreateProductDTO productDTO)
         {
             var productEntity = _mapper.Map<Product>(productDTO);
-            await _repository.CreateProduct(productEntity);
+            await _productRepository.CreateProduct(productEntity);
+            return new MessageResponseDTO("Criado com sucesso", true);
         }
 
-        public async Task UpdateProduct(CreateProductDTO productDTO)
+        public async Task<MessageResponseDTO> UpdateProduct(CreateProductDTO productDTO)
         {
-            throw new NotImplementedException();
+            var productEntity = _mapper.Map<Product>(productDTO);
+            await _productRepository.UpdateProduct(productEntity);
+            return new MessageResponseDTO("Atualizado com sucesso", true);
         }
 
-        public async Task DeleteProduct(int id)
+        public async Task<MessageResponseDTO> DeleteProduct(int id)
         {
             throw new NotImplementedException();
         }

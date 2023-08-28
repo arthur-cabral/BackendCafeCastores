@@ -9,7 +9,6 @@ namespace Application.DTOs.Products
 {
     public class CreateProductDTO
     {
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "The name is mandatory!")]
         public string Name { get; set; }
